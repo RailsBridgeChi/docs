@@ -5,7 +5,7 @@ require 'erector'
 require 'i18n'
 require 'i18n/backend/fallbacks'
 require 'font-awesome-sass'
-require 'bootstrap-sass'
+#require 'bootstrap-sass'
 require 'zip'
 require 'tmpdir'
 
@@ -41,7 +41,7 @@ class InstallFest < Sinatra::Application   # todo: use Sinatra::Base instead, wi
   settings.assets.append_path "assets/stylesheets"
   settings.assets.append_path "assets/javascripts"
   settings.assets.append_path "public/fonts"
-  settings.assets.append_path Bootstrap.javascripts_path
+#  settings.assets.append_path Bootstrap.javascripts_path
   JqueryCdn.install(settings.assets)
 
   if settings.environment == :development

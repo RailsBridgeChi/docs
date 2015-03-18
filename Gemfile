@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-ruby '2.2.0'
+ruby '2.1.2'
 
 gem 'activesupport'
 gem "erector", "~> 0.10.0"
@@ -17,7 +17,7 @@ gem "redcarpet"
 gem "rubyzip"
 gem "i18n", "~> 0.7"
 gem 'font-awesome-sass'
-gem 'bootstrap-sass'
+#gem 'bootstrap-sass'
 gem 'jquery-cdn'
 gem 'sprockets'
 
