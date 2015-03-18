@@ -1,4 +1,6 @@
-message "`cd` stands for change directory."
+message "`cd` stands for **c**hange **d**irectory."
+
+message "A directory is the same thing as a folder."
 
 option "Windows" do
   console "cd c:\\Sites"

@@ -81,9 +81,9 @@ class Step < Erector::Widget
 
   def step name = nil, options = {}
     num = next_step_number
-    a(:name => "step#{current_anchor_num}")
-    a(:name => options[:anchor_name]) if options[:anchor_name]
-    div :class => "step", :title => name do
+    a(name: "step#{current_anchor_num}")
+    a(name: options[:anchor_name]) if options[:anchor_name]
+    div class: "step" do
       h1 do
         widget BigCheckbox
         prefix I18n.t("general.step_title", :num => num) +
@@ -112,18 +112,12 @@ class Step < Erector::Widget
     ERB::Util.u(str)
   end
 
-  def simple_link name, options={}
-    require 'uri'
-    href = "#{_escaped(name)}?back=#{_escaped(page_name)}"
-    if @step_stack.length > 1
-      href += URI.escape('#') + "step#{current_anchor_num}"
-    end
+  def simple_link name, options={}, &blk
+    link_options = {href: _escaped(name)}.merge(options)
     if block_given?
-      a({:href => href}.merge(options)) do
-        yield
-      end
+      a link_options, &blk
     else
-      a Titleizer.title_for_page(name), {:href => href}.merge(options)
+      a Titleizer.title_for_page(name), link_options
     end
   end
 

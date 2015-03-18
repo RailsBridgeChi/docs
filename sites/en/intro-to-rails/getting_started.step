@@ -2,7 +2,7 @@ img src: "img/Start_page.png", alt: "Screenshot of a Ruby on Rails default home 
 
 goals do
   goal "Create Your New Application"
-message "Let's get started! By the end of this step, we'll have a brand-spankin'-new (empty) rails app."
+message "Let's get started! By the end of this step, we'll have a brand-spankin'-new (empty) Rails app."
 end
 
 steps do
@@ -25,26 +25,22 @@ steps do
   step do
     message "Check to see if you have any existing suggestotron apps from a previous workshop."
     console "ls"
-    message "That command will list the files in your railsbridge directory. If you have any old suggestotron apps in that list, you can remove them to prevent hiccups:"
+    message "`ls` stands for **l**i**s**t."
+    message "It lists the contents of the current directory."
+    message "If you have any old suggestotron apps in that list, you can remove them to prevent hiccups:"
     console "rm -rf suggestotron"
   end
 
   step do
     console "rails new suggestotron"
-    message "'rails new' creates a new rails project with the name you give."
+    message "`rails new` creates a new Rails project with the name you give."
     message "In this case we told it to create a new project called `suggestotron`. We'll go into detail on what it created shortly."
+    message "This will print a lot of stuff to the screen and can take a while to finish."
   end
 
   step do
     console "cd suggestotron"
-    message "'cd' stands for change directory."
-    message "'cd suggestotron' makes suggestotron our current directory."
-  end
-
-  step do
-    console "ls"
-    message "'ls' stands for 'list (stuff)'."
-    message "It shows you the contents of the current folder."
+    message "`cd suggestotron` makes suggestotron our current directory."
   end
 
   step do
@@ -89,7 +85,7 @@ Select your `suggestotron` folder from the file picker that opens. If everything
     }
     tr {
       td "app/assets/"
-      td "This is where your images, JavaScript, stylesheets (CSS), and other static files should go. Modern rails apps use something called the Assets Pipeline, which combines all the JavaScript and CSS files in this directory into a single file for speediness."
+      td "This is where your images, JavaScript, stylesheets (CSS), and other static files should go. Modern Rails apps use something called the Assets Pipeline, which combines all the JavaScript and CSS files in this directory into a single file for speediness."
     }
   end
 
