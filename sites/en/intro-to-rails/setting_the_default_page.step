@@ -5,7 +5,7 @@ goals {
 
   Currently when you go to <http://localhost:3000> you see the "Welcome aboard" message.
 
-  It would be easier to use our app if <http://localhost:3000> went directly to the topics list.
+  It would be easier to use our app if <http://localhost:3000> went directly to the dogs list.
 
   In this step we'll make that happen and learn a bit about routes in Rails.
   MARKDOWN
@@ -18,28 +18,28 @@ steps {
 
     message "Search the file for **root**, it should be near the top if you are using Rails 4."
 
-    message "Uncomment the line that contains the example command by removing the `#` sign in front of it, and change it to read `root 'topics#index'`. When you are done the line should look like this:"
+    message "Uncomment the line that contains the example command by removing the `#` sign in front of it, and change it to read `root 'dogs#index'`. When you are done the line should look like this:"
 
     source_code :ruby, <<-RUBY
-root 'topics#index'
+root 'dogs#index'
     RUBY
 
     em do
-      message "(Rails 3.x users should add `root to: 'topics#index'` and will need to remove their `public/index.html` file)."
+      message "(Rails 3.x users should add `root to: 'dogs#index'` and will need to remove their `public/index.html` file)."
     end
   end
 
   step "Confirm your changes" do
-    message "Go back to <http://localhost:3000/>. You should be taken to the topics list automatically."
+    message "Go back to <http://localhost:3000/>. You should be taken to the dogs list automatically."
   end
 }
 
 explanation {
 
  message <<-MARKDOWN
-  * `root 'topics#index'` is a Rails route that says the default
-    address for your site is `topics#index`. `topics#index` is the topics
-    list page (the topics controller with the index action).
+  * `root 'dogs#index'` is a Rails route that says the default
+    address for your site is `dogs#index`. `dogs#index` is the dogs
+    list page (the dogs controller with the index action).
   * Rails routes control how URLs (web addresses) get matched with
     code on the server. Similar to how addresses match with houses and
     apartments.
@@ -56,15 +56,15 @@ explanation {
     $ rake routes
 
         Prefix Verb   URI Pattern                Controller#Action
-        topics GET    /topics(.:format)          topics#index
-               POST   /topics(.:format)          topics#create
-     new_topic GET    /topics/new(.:format)      topics#new
-    edit_topic GET    /topics/:id/edit(.:format) topics#edit
-         topic GET    /topics/:id(.:format)      topics#show
-               PATCH  /topics/:id(.:format)      topics#update
-               PUT    /topics/:id(.:format)      topics#update
-               DELETE /topics/:id(.:format)      topics#destroy
-          root GET    /                          topics#index
+        dogs GET    /dogs(.:format)          dogs#index
+               POST   /dogs(.:format)          dogs#create
+     new_dog GET    /dogs/new(.:format)      dogs#new
+    edit_dog GET    /dogs/:id/edit(.:format) dogs#edit
+         dog GET    /dogs/:id(.:format)      dogs#show
+               PATCH  /dogs/:id(.:format)      dogs#update
+               PUT    /dogs/:id(.:format)      dogs#update
+               DELETE /dogs/:id(.:format)      dogs#destroy
+          root GET    /                          dogs#index
   ````
   This shows all the URLs your application responds to. The code that starts with colons are variables so :id means the id number of the record. The code in parenthesis is optional.
 
@@ -77,14 +77,14 @@ explanation {
 ### Exploring Routes (optional)
 
   Now you can have a look at the paths that are available in your app.
-  Let's try looking at one of the topics routes we just generated.
+  Let's try looking at one of the dogs routes we just generated.
   Open up your Rails console and play:
 
     $ rails console
-    >> app.topics_path
-    => "/topics"
-    >> app.topics_url
-    => "http://www.example.com/topics"
+    >> app.dogs_path
+    => "/dogs"
+    >> app.dogs_url
+    => "http://www.example.com/dogs"
 
   `app` is a special object that represents your entire application.
   You can ask it about its routes (as we just did), play with its
@@ -94,6 +94,6 @@ explanation {
   MARKDOWN
 }
 
-insert 'consider_deploying'
+message "Next, let's put your application on the real internet!"
 
-next_step "voting_on_topics"
+next_step "deploying_to_heroku"

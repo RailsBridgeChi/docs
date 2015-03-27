@@ -1,0 +1,116 @@
+goals do
+goal "What's a dog website without cute pictures? In this lesson you will learn to use gems to enable pictures on your website."
+  message "We will use the storage service Cloudinary and the image-modification gem CarrierWave to implement the most important part of a shelter website -- cute pictures!"
+end
+steps do
+  step do
+    message "add `gem  'carrierwave'` to your `Gemfile`"
+    explanation do
+    message "This gem comes with built-in abilities to process, resize, and store images. When we configure this, we'll have a choice of whether our pictures are stored on our filesystem or in a cloud storage system."
+    end
+  end
+  step do
+    console 'addons:add cloudinary'
+    message "add `gem 'cloudinary'` to the `Gemfile`"
+    explanation do
+      message "Since Heroku doesn't let us store images on our filesystem, we will need to use cloud storage. Cloudinary will give us a place to store our images where they'll be accessible via Heroku."
+      message "`addons:add cloudinary` activates Cloudinary via your Heroku account."
+    end
+  end
+  step do
+    console 'bundle install'
+    console 'rails g uploader picture'
+    explanation do
+    message "`rails g` is short for `rails generate` (you can type either; they do the same thing). You may remember this from `rails g migration` or `rails g scaffold` -- a generator creates code files for you with some things pre-filled in."
+    message "The `uploader` generator was added to your app by the `carrierwave` gem; it generated the file `app/uploaders/picture_uploader.rb`, which you can now open to edit the configuration of your picture upload system."
+    end
+  end
+  step do
+    message 'Open `app/uploaders/picture_uploader.rb:`'
+    message 'Add the code
+``` ruby
+include Cloudinary::CarrierWave
+```'
+explanation do
+message "This line tells the uploader to include some code from the `cloudinary` gem which enables CarrierWave to use Cloudinary as a storage system."
+end
+end
+step do
+    message 'comment out this line:'
+    message '``` ruby
+# storage :file
+```'
+    message 'comment out these lines:'
+    message '```ruby
+# def store_dir
+#  "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+#  end
+```'
+explanation do
+message "If we were storing the pictures on our own filesystem, rather than in the cloud, we would want to keep these lines, and our pictures would be stored in the `uploads/` directory; however, since we're going to use Cloudinary instead, we'll need to comment out the lines about filesystem storage." 
+end
+
+    message 'uncomment the line'
+    message "```ruby
+ version :thumb
+``` "
+    explanation do
+      message "This line means the uploader will automatically create resized thumbnail versions of your pictures -- so that your users won't have to worry about what size their pictures are when they upload them."
+    end
+end
+
+step do
+  message 'open `app/models/dog.rb`'
+  message 'add the code:'
+  message '```ruby
+mount_uploader :picture, PictureUploader
+```'
+  console 'rails g migration add_picture_to_dogs picture:string'
+  console 'bundle exec rake db:migrate'
+end
+step do
+message 'open `app/controllers/dogs_controller.rb`'
+  message 'Change the line in `dog_params` to:'
+  message '```ruby
+require(:dog).permit(:name, :age, :picture)
+```'
+explanation do
+message "Like when you added `age` to your dogs, you will need to specify in your controller that users are allowed to modify the dog's `picture`"
+end
+tip do
+message "If you added any fields to your `dogs` table before *besides* `name` and `age`, make sure to keep those in the `permit` arguments so that they will keep working."
+end
+end
+step do
+  message 'open `app/views/dogs/_form.html.erb` and add:'
+  message '```ruby
+   <div class="field">
+    <%= f.label :picture %>
+    <%= f.hidden_field(:picture_cache) %>
+    <%= f.file_field(:picture) %>
+  </div>
+```'
+  explanation do
+    message "This adds a file upload field to the form where you create or edit dogs, so that you will be able to add a picture."
+  end
+end
+step do
+  message 'Open `app/views/dogs/index.html.erb` and add:'
+  message '```erb
+    <td>
+          <%= image_tag(dog.picture_url(:thumb))  unless dog.picture_url(:thumb).blank? %>
+        </td>
+```'
+  explanation do
+    message "This line adds an image tag to your HTML, which looks for the URL to the thumbnail picture of your dog and uses that as the image source. Adding `unless dog.picture_url(:thumb).blank?` will keep you from having broken images for any dogs that haven't had pictures uploaded for them."
+  end
+end
+step do
+  message 'Commit your changes and push to heroku:'
+  console 'git commit -a -m "added pictures to dogs"'
+  console 'git push heroku master'
+  console 'heroku run rake db:migrate'
+  message "And now, you should be able to open your Heroku application, upload a picture to your dogs, and see that picture displayed in your list of dogs!"
+end
+end 
+next_step 'sorting'

@@ -1,3 +1,7 @@
+goals do
+  goal "Deploy your application to Heroku so you and your friends can keep a dog list on the internet."
+end
+
 h2 do
   span "If you haven't yet deployed to Heroku, start at "
   a 'First-time setup', href: '#first-time'
@@ -26,7 +30,7 @@ gem 'sqlite3'
 
     message "**Remove that line** and replace it with:"
 
-    source_code :ruby, <<-RUBY
+    message "```ruby
 group :development, :test do
   gem 'sqlite3'
 end
@@ -35,9 +39,15 @@ group :production do
   gem 'pg'
   gem 'rails_12factor'
 end
-    RUBY
-  end
+``` "
 
+    explanation do
+      message "The `Gemfile` manages our dependencies on other people's code and libraries. `group :development, :test` means these gems will only be used in your development/test environments (in this case, your local machine). `group :production` means these gems will only be used in your production environment (in this case, Heroku).
+
+ `sqlite` and `pg` are two different kinds of database software. Heroku only supports `pg`, which is why you need to make this change; this is a Heroku-specific quirk. Rails tries to be database-agnostic, so most of the time you won't even need to know what kind of database you're using."
+
+    end
+  end
   step "Apply the Gemfile changes" do
     console "bundle install --without production"
     message "Every time the `Gemfile` changes, you need to run ``bundle install`` for the changes to be processed. The processed version of the changes is stored in another file called ``Gemfile.lock``."
@@ -50,8 +60,12 @@ git add .
 git commit -m "Changed Gemfile for Heroku"
     SHELL
     tip "There is a period after the word add in the first line."
+       explanation do
+         message "Git is back! You are updating your git repository with your gemfile changes. This is important to do before the next step, because the state of your git repository will be the state of your heroku project."
+       end
   end
 end
+
 
 a name: 'every-time'
 situation "Every time" do
@@ -65,14 +79,21 @@ git add .
 git commit -m "Some helpful message for your future self"
     SHELL
     message "Your commit message should reference whatever your outstanding
-changes are: something like \"Added votes to the topics index\"."
+changes are: something like \"Added ages to dogs\"."
   end
 
   step "Push changes to Heroku" do
     console "git push heroku master"
     message "This takes all changes you've committed locally and pushes them to Heroku."
-  end
+       explanation do
+       message "`git push` sends a copy of your git history and your code somewhere else -- in this case, the Heroku servers.
 
+ `heroku` here is the name of the place to send the code. `master` is the name of the branch -- `master` is the default when you have only one git branch, and multiple branches are beyond today's project.
+
+ Usually `git push` just sends a copy of the code; Heroku does something extra, by deploying the code and running it on a webserver every time you push a new version.
+"
+  end
+  end
   step "Run database migrations on Heroku" do
     console "heroku run rake db:migrate"
     message "This tells Heroku to run your migrations on its database, like
@@ -80,33 +101,27 @@ running `rake db:migrate` locally."
     message "Heroku's database is separate from the one on your computer, which
 means it needs to be updated every time you make changes to the structure of
 your database."
-    message "It also means that you'll not see any of the data you entered into
+    message "It also means that you won't see any of the data you entered into
 the `sqlite3` database on your computer."
   end
 
   step "Visit your application" do
     console "heroku open"
     message "This opens the new application in your browser."
+explanation do
+
+
+
+       message "This opens up a browser window showing your real, live app on the real, live internet!
+
+ You may notice that there are no dogs here, even if you added dogs on your local copy. This is because the Heroku copy of your app has a separate database from your local project. They run on the same code, but have their own databases.
+
+ Try adding/removing some dogs on Heroku and on your local machine; then compare your Heroku dogs to your local dogs. The two instances of your app show a totally different set of dogs, even though they use the same code to store and display them.
+
+ "
+end
   end
 end
-
-explanation do
-  message <<-MARKDOWN
-  First, we had to do some work to make Heroku happy with our application. This
-required updating the `Gemfile` and bundling.
-
-  * The `Gemfile` is a list of all the Ruby libraries your application needs.
-    What we've declared here is that we want to use the `sqlite3` library
-    while we're developing on our computer (the development group) but when
-    deploying to Heroku (the production group) we want to use the `pg` library,
-    which is made for the type of database that Heroku uses.
-
-  * Bundler is how Ruby projects keep track of the gems that they use. We told
-    Bundler what we wanted to use in the `Gemfile`, now we need to make sure those
-    gems are installed. Since we don't have the type of database Heroku does, we
-    skip the production gems. Don't worry though! Bundler still logs them so
-    Heroku will install them when they get your code.
-  MARKDOWN
 
   message "You should be able to deploy your application any time it's in a good, working state. Your typical workflow will look like:"
   img src: "img/workflow.png", alt: "Diagram showing git workflow of making changes, committing them, and pushing to Heroku.", style: "border: none"
@@ -116,4 +131,8 @@ required updating the `Gemfile` and bundling.
     li { message "(repeat)" }
   end
   message "Any time your changes are committed, you should feel free to `git push heroku master` and boom! Your changes are live!"
-end
+
+
+  message "Now would be a good time to take a stretching break; also, you can send your Heroku url to your friends, who can add their own dogs to your database and marvel at this cool thing you made!"
+
+next_step 'datatypes'

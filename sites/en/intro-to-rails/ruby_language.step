@@ -1,3 +1,5 @@
+message "Before you start your Rails project, here is a brief introduction to the Ruby programming language."
+
 goals do
   goal "Be able to use the basic building blocks of Ruby code"
   goal "Use IRB to run Ruby code"
@@ -154,4 +156,4 @@ my_opinion(["apple", "pizza", "orange"])
   end
 end
 
-next_step "getting_started"
+next_step "rails_architecture"

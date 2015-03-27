@@ -23,37 +23,28 @@ steps do
   end
 
   step do
-    message "Check to see if you have any existing suggestotron apps from a previous workshop."
-    console "ls"
-    message "`ls` stands for **l**i**s**t."
-    message "It lists the contents of the current directory."
-    message "If you have any old suggestotron apps in that list, you can remove them to prevent hiccups:"
-    console "rm -rf suggestotron"
-  end
-
-  step do
-    console "rails new suggestotron"
+    console "rails new railsbridge_dogs"
     message "`rails new` creates a new Rails project with the name you give."
-    message "In this case we told it to create a new project called `suggestotron`. We'll go into detail on what it created shortly."
+    message "In this case we told it to create a new project called `railsbridge_dogs`. We'll go into detail on what it created shortly."
     message "This will print a lot of stuff to the screen and can take a while to finish."
   end
 
   step do
-    console "cd suggestotron"
-    message "`cd suggestotron` makes suggestotron our current directory."
+    console "cd railsbridge_dogs"
+    message "`cd railsbridge_dogs` makes railsbridge_dogs our current directory."
   end
 
   step do
     message <<-MARKDOWN
-Open the suggestotron folder as a project in your text editor.
+Open the `railsbridge_dogs` folder as a project in your text editor.
 
 In **Sublime Text 2**, you can use the `Project > Add Folder to Project...` menu option:
 
 ![Sublime Text Project menu screenshot](img/sublime_add_folder_to_project.png)
 
-Select your `suggestotron` folder from the file picker that opens. If everything works out Sublime should show the directories of your app in a tree structure on the left:
+Select your `railsbridge_dogs` folder from the file picker that opens. If everything works out Sublime should show the directories of your app in a tree structure on the left:
 
-![Screenshot of Suggestotron project folder tree in Sublime Text](img/sublime_project_as_folder.png)
+![Screenshot of project folder tree in Sublime Text](img/sublime_project_as_folder.png)
     MARKDOWN
   end
 

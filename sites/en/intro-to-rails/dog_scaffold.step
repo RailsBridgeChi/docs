@@ -1,0 +1,173 @@
+goals do
+  goal "Make an application that lists all the dogs in the shelter, and allows the user to create, edit, or delete dogs."
+
+end
+steps do
+  # step "Create a new Rails application" do
+  #   console "rails new railsbridge_dogs"
+  #   explanation do
+  #     message "This creates a folder called 'railsbridge_dogs' that will hold all the code for your application."
+  #     message "A whole lot of files are generated! These files are the code that makes up the Rails framework. When you execute this command, you will see a list in your terminal of all the files that were just created."
+  #     message "You will be editing some of these files, and creating some new ones as we go."
+  #   end
+  # end
+  # step "Check your application into Git version control" do
+  #   console "git init; git add .; git commit -a -m 'first commit'"
+  #   message "(Make sure you are in the railsbridge_dogs directory when you do this.)"
+  #   explanation do
+  #     message "We initialized a git repository, added all our files to it, and committed."
+  #     message "This means we have stored the state of files as of this commit -- with our 'first commit' message. This state is now accessible via our git history, no matter what changes we make."
+  #     message "So we can always get back to this pristine app if we want!"
+  #   end
+  end
+  step "Use scaffolding to create the basic files needed to create, read, update, and delete `dog` resources" do
+    console "rails g scaffold dogs name:string"
+    explanation do
+      message "The Rails framework includes code to create *scaffolding*: scaffolds are files with the basic code needed to create, edit, and delete resources."
+      message "Usually, you will edit your scaffolds significantly to create your final product."
+      message "Scaffolding creates a lot of files (as you can see in your terminal output.)
+Some important ones include:
+
+* database migrations: `db/migrate/[date_and_time]_create_dogs.rb`
+
+`dogs name:string` means our table is called `dogs` and has a value called `name` for each row
+
+* models: `app/models/dog.rb`
+* views: `app/models/views/dogs`
+* controllers: `app/controllers/dogs_controller.rb`
+
+The basic CRUD features for `dogs` are already in the model, view, and controller files.
+"
+    end
+  end
+  step  "Use migrations to create a database that stores your `dogs`" do
+    console "bundle exec rake db:create; bundle exec rake db:migrate
+"
+
+explanation do
+  message <<-MARKDOWN
+`rake` (**r**uby m**ake**) is a tool that allows you to run small Ruby programs (**tasks**) that you use often in your application.
+
+Here, `rake db:migrate` is a task provided by the Rails framework. It uses the migration file we just created (`db/migrate/201xxxxxxxxxxx_create_topics.rb`) to change the database. Database migration files can be crucial to code collaboration.
+
+  MARKDOWN
+
+  tip "You can run `rake -T` to see a list of all the `rake` commands your app currently responds to, along with a short description of each task."
+
+      message "`db:create` created a database called `railsbridge_dogs` on your local development machine (usually, there is one database per application)"
+      message "`db:migrate` ran any pending migrations from the `db/migrate` folder; in this case, the `create_dogs` migration. You should see terminal output explaining what happened: the `dogs` table was added to your database. (Usually, there is one table per type of resource in the application.)
+"
+    end
+  end
+  step "View your app in your browser" do
+    step "Start the server" do
+      console "rails server"
+
+      explanation do
+        message "`rails server` started a webserver running on your computer that will turn your code into webpages"
+            message "While the server is running, whatever you type in that terminal tab
+will be ignored."
+            message "To get back to the terminal, you can stop the server by typing
+`Control-c`."
+    result <<-STOPPING_RAILS_SERVER
+^C[#{Time.now.strftime("%Y-%m-%d %H:%M:%S")}] INFO  going to shutdown ...
+[#{Time.now.strftime("%Y-%m-%d %H:%M:%S")}] INFO  WEBrick::HTTPServer#start done.
+Exiting
+    STOPPING_RAILS_SERVER
+    explanation do
+  message "`rails server` ran your application locally just like Heroku will be running it on their servers."
+  message "This provides a very simple means to see your changes before you commit and push them to Heroku."
+  message "`Control-c` is a way of closing or cancelling terminal programs. Since
+`rails server` runs forever, you need to interrupt it with `Control-c`."
+end
+
+      end
+    end
+    step "Visit the app" do
+      message "Open your web browser and go to `http://localhost:3000/dogs`"
+        message "In the browser, you should see an empty list of dogs. What you are seeing is the `dogs/index.html.erb` view."
+      end
+  end
+    step "Create a new dog" do
+      message "Follow the 'new' link to go to the 'New Dog' page, and fill out the form. Then, go 'back' to your list of dogs."
+      explanation do
+        message "You just used your application's web interface to add a new record to your database. Now, you can see this record in the list of all `dog` records."
+      end
+    end
+    step "Edit this dog" do
+      message "Follow the 'edit' link next to your dog to go to the 'Edit Dog' page; change the dog's name in the form. Then, go 'back' to your list of dogs.
+"
+      explanation do
+        message "You just used your application's web interface to change a record in your database. The changes should be reflected on your list of dogs."
+      end
+      message "Play around with creating, reading, updating, and deleting your dog records -- asking a TA if you need clarification on anything -- until you feel confident that you understand what this application does."
+    end
+
+  step "Edit the view that displays your `dog` list" do
+    message "Edit the file `app/views/dogs/index.html.erb`; put `<b></b>` tags on either side of the code `<%= dog.name %>`.
+"
+    explanation do
+      message "Rails views use a combination of HTML and ERB (which is a kind of Ruby code)."
+      message "Anything within a `<%= %>` is interpreted as Ruby code when the page is printed; for example, `<%= dog.name %>` will print whatever is in the `name` column for that `dog` record.
+
+Anything within a `<% %>` is interpreted as Ruby code, but not printed out. For example, this page uses a *loop* to print out the same information for each `dog` record: the loop begins with `<% for @dogs.each %>` and ends with `<% end %>`.
+
+All of the code within the loop gets executed once for each record stored in the `@dogs` array variable. Since you added the `<b></b>` tags within the loop, the boldness is applied to all the dogs in your database. (Add some more dogs to your database if you have less than two dogs right now, so you can see the loop in action.)
+"
+    end
+  end
+  
+#   step "Deploy to Heroku" do
+#     step "Commit your changes" do
+#       console "git add .; git commit -a -m 'added dogs'"
+#       explanation do
+#         message "This may look familiar! You set up your Git repository earlier; now, you've added your new files and committed your changes. This puts a new save point for your code into your Git repository. In the terminal output, you should see a list of the files that have been added or changed since your last commit -- several of them should look familiar!
+
+# Committing your code also sets you up for deploying to Heroku, which will use this save point to deploy your code.
+# "
+#       end
+#     end
+#     step "Create a heroku instance" do
+#         console 'heroku create'
+#         message "Use the browser to open the URL heroku gave you."
+#         explanation do
+#           message "Heroku is a hosting service that will enable you to have your code running on the internet. This command sets up a heroku instance that will store and serve your app."
+#         end
+#     end
+#     step "Edit your Gemfile" do
+#       message "Edit the file `Gemfile`, and replace the line `gem 'sqlite3'` with: "
+# message "``` ruby
+# group :development, test do
+# end
+# ``` "
+#     end
+#     step "Update your local gems" do
+#       console 'bundle install --without production'
+#       explanation do
+#         message "This will update your locally installed gems based on the `Gemfile` (which you just changed). You should see a list of the gems that are being installed output in the console."
+#       end
+#     end
+#     step "Commit your changes again" do
+#       console "git add .; git commit -a -m 'Gemfile change'"
+#     end
+#     step "Send code to heroku" do
+#       console 'git push heroku master'
+# "
+#       end
+#     end
+#     step "Run database migrations on the heroku server" do
+#       console 'heroku run rake db:migrate'
+#       message "This does the same thing that `db:migrate` did on our local machine (create a database, and add and format the `dogs` table); but this time, on Heroku's servers.
+# "
+#     end
+#     step "Open your new app" do
+#       console 'heroku open'
+#       explanation do
+#       end
+#     end
+#     end
+
+ # end
+
+message "When you're ready:"
+next_step 'setting_the_default_page'

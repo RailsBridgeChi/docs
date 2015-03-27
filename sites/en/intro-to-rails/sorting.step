@@ -1,0 +1,105 @@
+steps do
+
+  step do
+    message "In `dogs_controller#index`, we have `@dogs = Dog.all`. Let's explore a little further what this is and how we can manipulate it."
+    console 'rails console'
+    console 'Dog.all'
+    console 'Dog.all.class'
+    message "If you are using Rails 4, this will be `ActiveRecord::Relation`. While this is not *exactly* like an array, it is able to do most of the things that an array can do. ; explaining what that is is too hard for right now. We can use it like an array in many ways. Like an array, it is a manipulable list -- you can sort it, filter it, reverse it, etc."
+    tip 'It may be helpful to check out the [official Ruby documentation on Array methods](http://ruby-doc.org/core-2.2.0/Array.html)'
+    console  "@dogs = Dog.all.sort_by{|d| d.name }"
+    explanation do
+      message "The `sort_by` method is passed a *block* -- this tells the method how to sort the objects. In this case, it sorts them alphabetically by name."
+    end
+     console "@dogs = Dog.all.select{|d| d.age < 5 }"
+    explanation do
+      message "The `select` method is also passed a *block* -- the `{|d| d.age < 5 }` part. This describes a function to use to select -- the whole thing will fill the `@dogs` variable with all of the dogs from `Dog.all` for which the block is true. In this case, the block compares the dog's age with the number 5; it is true if the dog is under 5 years old.
+"
+    end
+  end
+  
+  step do
+    message 'Open app/views/dogs/index.html, and look at where the `@dogs.each` code is used.'
+    message "`@dogs` is `Dog.all` (set in `dogs_controller`), so it's an `ActiveRecord::Relation` -- again, this works basically like an array for your purposes."
+    message "`.each` is an array method that we can also use on `ActiveRecord::Relation` -- it executes the code within the block (either `do..end` or `{..}`) after `.each` once using each item from the list of `@dogs`. "
+    message "Look at the loop in the view, and make sure you can visualize how the code executes once for each dog in `@dogs`."
+  end
+
+  step "Sorting and selecting" do
+    message "Open `/app/controllers/dogs_controller.rb`."
+    explanation do
+      message "The controller uses `Dog.all` to populate our list of dogs; if you change this to `Dog.all.sort_by{|d| d.name}`, you will get the same list of dogs, but this time in alphabetical order by name."
+      message "no changes to the view were made, but the dogs in the view are in a different order!"
+    end
+    message "Try: accepting a parameter in your controller, and sorting by that."
+    message " ```ruby
+if params[:sort_by]
+      @dogs = Dog.all.sort_by{|d| d.send(params[:sort_by]) }
+   else
+      @dogs = Dog.all
+    end
+```
+"
+    explanation do
+      "`.send` takes a string and uses that as the method name -- so `d.send('name')` evaluates to `d.name`, and `d.send('age')` evaluates to `d.age`. So you can now sort your dogs by any of their attributes, by passing the name of that attribute as a parameter."
+    end
+  end
+
+  step 'Filtering dogs' do
+    message '```ruby
+@dogs = @dogs.select{|d| d.age < 5 }
+```'
+    explanation do
+      message "`select` takes a block, just like `sort_by`. In this block, you check for each dog `d` whether `d` has an `age` less than five; if and only if it does, it will stay in the new `dogs` variable.
+"
+    end
+message '
+```ruby
+@dogs = @dogs.select{|d| !(d.picture_url.blank?) }
+```
+'
+explanation do
+  message "This statement, checking for dogs with pictures, is similar. Notice that you are specifically looking for dogs where the picture is not blank (`!` means not in programming), and that the `.picture_url.blank?` function is the same one you used in your view to avoid showing broken images."
+end
+  end
+  step do
+    message '
+```ruby 
+def index
+    if params[:sort_by]
+      @dogs = Dog.all.sort_by{|d| d.send(params[:sort_by])} 
+    elsif params[:babies]
+      @dogs = Dog.all.select{|d| d.age < 5 }
+    elsif params[:pictures]
+      @dogs = Dog.all.select{|d| !(d.picture_url.blank?) }
+    else
+      @dogs = Dog.all
+    end
+  end
+````'
+    explanation do
+      message 'Putting this conditional code in your controller means that your users can pass parameters to your application to sort or filter your dogs -- the kind of sorting or filtering will be determined by the parameter.'
+    end
+  end
+  step do
+    message 'Open `app/views/dogs.html` and add links at the top to sort your dogs.'
+    message '
+```erb
+ <p>Sort:
+  <%= link_to "by name", dogs_path(sort_by: :name) %>
+  <%= link_to "by age", dogs_path(sort_by: :age) %>
+</p>
+<p>Filter:
+  <%= link_to "dogs under 5yo", dogs_path(babies: :true) %>
+  <%= link_to "dogs with pictures", dogs_path(pictures: :true) %>
+</p>
+```'
+    explanation do
+      message '`dogs_path` is Rails-ese for the URL of the dogs index page. You can pass arguments to this function, which are then used as parameters -- so `dogs_path(babies: :true)` will translate to `/dogs?babies=true`. Then, when the `dogs#index` action in the controller is run, `params[:babies]` will be true, so a filtered list will be displayed.
+
+Notice how you use `dogs_path` for all the sort/filter links, but pass different arguments each time -- and these arguments match the conditions you set up in your controller.
+'
+    end
+  end
+end
+

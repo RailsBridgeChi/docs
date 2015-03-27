@@ -1,52 +1,21 @@
 message <<-MARKDOWN
 ### Goal
 
-To teach you Ruby on Rails we are going to use a "Real World"
-example. You've decided to create a voting system for you and your
-friends to play with. You've decided at a minimum, you'd like to
-allow users to:
+Today, we're going to learn the basics of creating and interacting with a database. A database is a way of storing structured information in a computer; usually, a database is organized into tables, where each table represents a kind of thing, each row represents an instance of that thing,
 
-* view the topics sorted by number of votes
-* vote on topics
-* create, edit, and destroy topics
+For now, we're just going to create one table, so we're just going to have one type of thing in our database. Choose a type of thing that your database will focus on. During this step, you will create a database that will store a list of things, and you will be able to view and edit your list of things on a webpage. You can work with the example scenario, any of the alternative scenarios, or any scenario you’d like to make up where having a list of things would be useful.
 
-You've sketched up an initial screenshot of what you want it to look like:
+EXAMPLE SCENARIO: You are making a list of adoptable dogs for an animal shelter. 
 
-![Browser window with topic titles that can be voted on, ordered by number of votes](img/finished_app.png)
+ALTERNATIVE SCENARIOS: You are making a list of cities to consider relocating to; you are making a list of staff in your office; you are making a list of records in your record collection.
 
-### Meta-Goal
+If you want to be able to use the exact code from these instructions or from our example on GitHub, use the example scenario and create a list of dogs. If you’re up for a bit more challenge, use whatever scenario you’d like -- just make sure to use the right table and file names for your choice. E.g. for the animal shelter example, our table is named “dogs”; for the city example, you would use the same code but replace “dog/dogs” with “city/cities”.
 
-When you have completed today's goal of getting the basic
-application online you should understand:
 
-* Basic Ruby syntax
-* How to try your Ruby code (IRB)
-* How to go from requirements to a new working Rails application
-* How to get your application online
-* The basic tools a RoR developer uses (source control, editor, console, local server)
-
-### Schedule
-
-* 1-ish hour of Ruby
-* 4-ish hours of Rails, broken up in 1-ish hour steps
-
-This is just a rough guideline, not a mandate. Some steps you'll go
-over and some you'll go under. It'll all work out by the end of the
-day. Probably.
-
-### Requirements
-
-We're going to be working with:
-
-* Ruby 2.1 or 2.2 installed via RVM (Mac or Linux) or RailsInstaller (Windows)
-* Rails 4.2.x
-* Bundler
-* SQLite
-* The text editor of your choice
-
+### Before you get started, make sure you have everything installed correctly.
 Everything should be set up the night before during our
 install-fest. Please ensure you have everything working _before_ you
-show up for RailsBridge on Saturday.
+show up for RailsBridge on Saturday. *If you do not have an installation sticker by Saturday morning, you may not be able to participate.*
 
 You can verify that you have everything working by trying this out in your terminal:
 
@@ -98,4 +67,3 @@ end</pre>
 MARKDOWN
 
 next_step "ruby_language"
-

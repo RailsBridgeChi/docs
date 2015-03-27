@@ -1,6 +1,6 @@
 goals {
 
-  goal "Create a database table for topics with a title and a description"
+  goal "Learn the basics of Rails architecture"
 
   message "In this step we'll learn a bit about Rails architecture. By the end of this step you should understand the following concepts:"
 
@@ -51,3 +51,5 @@ Models, Views and Controllers each have specific jobs.  Separating responsibilit
   If you want to learn more about Rails Architecture, you may want to watch this video explanation (3 min 30 sec) [MVC architecture *Youtube*](https://www.youtube.com/watch?v=eTdVkgF_Slo)
   MARKDOWN
 }
+
+next_step 'getting_started'

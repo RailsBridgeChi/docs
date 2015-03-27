@@ -49,11 +49,7 @@ class DocPage < Html5Page
   end
 
   def top_links
-    [
-      TopLink.new(name: "toc", href: "#", extraclass: 'show-when-small', toggle_selector: '#table_of_contents'),
-      TopLink.new(name: "src", href: src_url, extraclass: 'hidden-sm'),
-      TopLink.new(name: "git", href: git_url, extraclass: 'hidden-sm'),
-    ]
+    []
   end
 
   def body_attributes
@@ -74,12 +70,12 @@ class DocPage < Html5Page
         }
       }
       ul(class: "navbar-nav nav") {
-        widget Flags, locale: @locale
+#        widget Flags, locale: @locale
 
-        li(class: "dropdown") {
-          a("sites", href: "#", class: "dropdown-toggle", "data-toggle" => "dropdown")
-          widget SiteIndex, site_name: site_name, locale: @locale
-        }
+#        li(class: "dropdown") {
+#          a("sites", href: "#", class: "dropdown-toggle", "data-toggle" => "dropdown")
+#          widget SiteIndex, site_name: site_name, locale: @locale
+#        }
 
         top_links.each do |top_link|
           widget top_link

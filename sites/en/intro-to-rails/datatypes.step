@@ -1,0 +1,87 @@
+goals do
+  goal "Add more information to our dogs table"
+  message "Now that we have a table full of dogs with names, we'd like to add some more information! Just having a list of names isn't that interesting. But we know lots of things about our dogs -- age, color, date they entered the shelter, whether or not they're fixed -- that we'd like to have available for our potential adopters.
+
+In this module, we will learn how to add fields to a database table, and we will learn a bit about the data types that are our options. A _data type_ refers to the way we define the field in our database table, which indicates what kind of values can then be stored in that field. For example, when we named our dogs in the last module, we used the data type `string`, which refers to anything that can be put in quotes (like `\"Fido\"` or `\"hello world\"` or `\"My, that's a cute dog you have there!\"`). But for things like age or shelter entrance date, an `integer` or `date` data type will be more appropriate."
+end
+steps do
+  step "Add a field to the database to store dogs' ages" do
+    console "rails g migration AddAgeToDogs age:integer"
+    console "bundle exec rake db:migrate"
+    explanation do
+      message "When you first generated your `dogs` table, you put `name:string` in your generating code -- this created for you a field in your `dogs` table called `name` that stores `string` values.
+
+A string is a common type of value used in programming -- a short amount of text that can be contained within quotes. So `\"Fido\"` is a string, `\"Hello World\"` is a string, `\"asdf!1!eleventyone\"` is a string.
+
+An integer is another common type of value that is more appropriate to use for the dog's age.
+As you may remember from math class, an integer is any number without a fractional part -- e.g. `1`, `0`, `205`, `-53`, etc.
+
+By using `age:integer` when generating your migration, you added a field called `age` that stores `integer` values; just like by using `name:string` earlier, you added a field called `name` that stores `string` values.
+
+[This reference page](http://api.rubyonrails.org/classes/ActiveRecord/ConnectionAdapters/TableDefinition.html#method-i-column) lists the data types that we can use in Rails migrations -- it's a good idea to become familiar with most of these options.
+"
+    end
+  end
+  step "Edit your controller to add `age` to the permitted parameters" do
+    message "Open `/app/controllers/dogs_controller.rb`"
+    message "change params.require(:dog).permit(:name) to params.require(:dog).permit(:name, :age)"
+    explanation do
+      message " This is telling our controller code what parameters to accept for the `dog` object.
+
+This means that if we send part of the `DogsController` a request which asks to change or set a dog's `name` or `age`, the controller will pass those along; but if we ask to change a dog's `admin_status` or `fblrg`, the controller will not allow this.
+
+Why is this important? Because it's easy for someone with bad intentions to send whatever parameters they want to our request. So we don't want to allow just arbitrary parameters to be set by request -- then malicious users could do things like send `is_admin=true` when updating their own account, and gain access to everything!
+
+[This page](http://api.rubyonrails.org/classes/ActionController/Parameters.html) discusses how the latest versions of Rails handle parameters -- the default behavior is the most secure, i.e. not accepting any parameters not explicitly allowed in the code. So each time we add a new field to our model, if we want the existing `edit`/`new`/`update` code to accept input for that field, we need to add it to the permitted parameters."
+    end
+  end
+  step  "Edit `_form.html.erb` to add an input field for the dog's age" do
+    message "add to `/app/views/dogs/_form.html.erb`:"
+    message "```erb
+ <div class='field'>
+    <%= f.label :age %><br>
+    <%= f.number_field :age %>
+  </div>
+```"
+    explanation do
+      message "
+ Now, when you go to edit one of your dogs, you'll be able to set their age!
+`number_field` is a Rails form helper; this creates a field that accepts numbers in the form the user sees in their browser.
+
+[Here] (http://api.rubyonrails.org/classes/ActionView/Helpers/FormHelper.html) you can view a list of the various form helpers available in Rails.
+"
+    end
+  end
+  step "Edit the index page to display the dog's age" do
+    message "edit `/app/views/dogs/index.html.erb`
+
+add `<th>Age</th>` after `<th>Name</th>`
+add `<td><%= dog.age %></td>` after `<td><%= dog.name %></td>`
+"
+  end
+end
+message "  Now, we should be fully prepared to add ages to our dogs. Here's what we did:
+
+* add a field in the database to store the age
+* tell the controller to accept the :age parameter
+* add a field in the form where we can enter the age
+* add a field in the index to display the age
+
+Go into your application and make sure you can add and view dogs' ages! (If you can't, review the above to see where you went wrong, and/or ask a TA.)
+Now is also a good time to git commit your changes and push to Heroku. [link to where we did this before]
+"
+message "
+Next: learn about some other datatypes! See the link above.
+Try to choose the right datatypes for:
+
+* the date a dog arrived in the shelter
+* the color of the dog
+* a description of the dog's temperament
+* whether or not the dog is fixed
+
+Then, try to add those fields to your application, using the same steps we used to add age to our dogs; make sure you can edit each of these fields and see them listed on your homepage.
+
+Ask a TA or work with another student if you run into issues!
+
+"
+next_step 'pictures'
