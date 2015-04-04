@@ -111,15 +111,13 @@ the `sqlite3` database on your computer."
     message "This opens the new application in your browser."
 explanation do
 
-
-
        message "This opens up a browser window showing your real, live app on the real, live internet!
 
  You may notice that there are no dogs here, even if you added dogs on your local copy. This is because the Heroku copy of your app has a separate database from your local project. They run on the same code, but have their own databases.
 
- Try adding/removing some dogs on Heroku and on your local machine; then compare your Heroku dogs to your local dogs. The two instances of your app show a totally different set of dogs, even though they use the same code to store and display them.
+ Try adding/removing some dogs on Heroku and on your local machine; then compare your Heroku dogs to your local dogs. The two instances of your app show a totally different set of dogs, even though they use the same code to store and display them!
 
-Make sure that you can visualize how the contents of the database are different from the code running the application.
+Make sure that you can visualize this difference: the contents of the database are separate from the code running the application.
  "
 end
   end

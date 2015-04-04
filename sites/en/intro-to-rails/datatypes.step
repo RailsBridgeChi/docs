@@ -68,7 +68,7 @@ message "  Now, we should be fully prepared to add ages to our dogs. Here's what
 * add a field in the index to display the age
 
 Go into your application and make sure you can add and view dogs' ages! (If you can't, review the above to see where you went wrong, and/or ask a TA.)
-Now is also a good time to git commit your changes and push to Heroku. [link to where we did this before]
+Now is also a good time to <a href='/intro-to-rails/add_the_project_to_a_git_repo#step5'>commit your changes</a> and push to Heroku. 
 "
 message "
 Next: learn about some other datatypes! See the link above.
