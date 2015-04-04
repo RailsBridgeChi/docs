@@ -46,7 +46,8 @@ end
 
  `sqlite` and `pg` are two different kinds of database software. Heroku only supports `pg`, which is why you need to make this change; this is a Heroku-specific quirk. Rails tries to be database-agnostic, so most of the time you won't even need to know what kind of database you're using."
 
-    end
+ info "You may have heard of or even worked with MySQL, especially if you've done some programming before -- MySQL is a database software just like `sqlite` and `pg`, and it's pretty common. Generally, you can use MySQL with Rails; but today, we're just working with `sqlite` and `pg`."
+
   end
   step "Apply the Gemfile changes" do
     console "bundle install --without production"
