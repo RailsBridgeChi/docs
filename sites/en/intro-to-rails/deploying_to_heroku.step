@@ -119,6 +119,7 @@ explanation do
 
  Try adding/removing some dogs on Heroku and on your local machine; then compare your Heroku dogs to your local dogs. The two instances of your app show a totally different set of dogs, even though they use the same code to store and display them.
 
+Make sure that you can visualize how the contents of the database are different from the code running the application.
  "
 end
   end
