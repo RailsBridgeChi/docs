@@ -87,7 +87,7 @@ end
       message "Open your web browser and go to `http://localhost:3000/dogs`"
         message "In the browser, you should see an empty list of dogs. What you are seeing is the `dogs/index.html.erb` view."
       end
-info "If you killed the server with `Control-c` in the last step, you may need to run `rails server` in your terminal again before this step."
+tip "If you killed the server with `Control-c` in the last step, you may need to run `rails server` in your terminal again before you can see the app in your browser."
   end
     step "Create a new dog" do
       message "Follow the 'new' link to go to the 'New Dog' page, and fill out the form. Then, go 'back' to your list of dogs."
@@ -170,5 +170,5 @@ All of the code within the loop gets executed once for each record stored in the
 
  # end
 
-message "When you're ready:"
+  message "When you're ready:"
 next_step 'setting_the_default_page'
