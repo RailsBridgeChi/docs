@@ -48,6 +48,7 @@ end
 
  info "You may have heard of or even worked with MySQL, especially if you've done some programming before -- MySQL is a database software just like `sqlite` and `pg`, and it's pretty common. Generally, you can use MySQL with Rails; but today, we're just working with `sqlite` and `pg`."
 
+    end
   end
   step "Apply the Gemfile changes" do
     console "bundle install --without production"
