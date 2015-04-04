@@ -1,7 +1,7 @@
 message <<-MARKDOWN
 ### Goal
 
-Today, we're going to learn the basics of creating and interacting with a database. A database is a way of storing structured information in a computer; usually, a database is organized into tables, where each table represents a kind of thing, each row represents an instance of that thing,
+Today, we're going to learn the basics of creating and interacting with a database using the Rails framework and the Ruby language. A database is a way of storing structured information in a computer; usually, a database is organized into tables, where each table represents a kind of thing, each row represents an instance of that thing,
 
 For now, we're just going to create one table, so we're just going to have one type of thing in our database. Choose a type of thing that your database will focus on. During this step, you will create a database that will store a list of things, and you will be able to view and edit your list of things on a webpage. You can work with the example scenario, any of the alternative scenarios, or any scenario you’d like to make up where having a list of things would be useful.
 
@@ -17,21 +17,8 @@ Everything should be set up the night before during our
 install-fest. Please ensure you have everything working _before_ you
 show up for RailsBridge on Saturday. *If you do not have an installation sticker by Saturday morning, you may not be able to participate.*
 
-You can verify that you have everything working by trying this out in your terminal:
+<a href='http://curriculum.railsbridge.org/installfest/get_a_sticker'>Check your installation here.</a>
 
-<div class="console"><pre>
-$ irb
->> 1 + 2
-=> 3
->> require "active_support"
-=> true
->> exit
-$
-</pre>
-</div>
-
-If you can do that, you are probably good to go.
-MARKDOWN
 
 insert 'working_effectively_and_efficiently'
 
