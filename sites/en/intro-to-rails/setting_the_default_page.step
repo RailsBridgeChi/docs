@@ -25,7 +25,7 @@ root 'dogs#index'
     RUBY
 
     em do
-      message "(Rails 3.x users should add `root to: 'dogs#index'` and will need to remove their `public/index.html` file)."
+      tip "(Rails 3.x users should add `root to: 'dogs#index'` and will need to remove their `public/index.html` file)."
     end
   end
 
