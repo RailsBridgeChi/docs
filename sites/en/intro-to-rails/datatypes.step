@@ -25,10 +25,13 @@ By using `age:integer` when generating your migration, you added a field called 
   step "Edit your controller to add `age` to the permitted parameters" do
     message "Open `/app/controllers/dogs_controller.rb`"
     message "change 
-```ruby
+ruby```
 params.require(:dog).permit(:name)
-``` to 
-```params.require(:dog).permit(:name, :age)```"
+``` 
+to 
+ruby```
+params.require(:dog).permit(:name, :age)
+```"
     explanation do
       message " This is telling our controller code what parameters to accept for the `dog` object.
 
