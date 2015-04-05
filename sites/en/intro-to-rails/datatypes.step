@@ -23,13 +23,13 @@ By using `age:integer` when generating your migration, you added a field called 
     end
   end
   step "Edit your controller to add `age` to the permitted parameters" do
-    message "Open `/app/controllers/dogs_controller.rb`"
-    message "change 
-```ruby
+    message "Open `/app/controllers/dogs_controller.rb` and change the line:"
+message "```ruby
 params.require(:dog).permit(:name)
-``` 
-to 
-```ruby
+```"
+message "to"
+
+message "```ruby
 params.require(:dog).permit(:name, :age)
 ```"
     explanation do
