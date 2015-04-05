@@ -15,7 +15,9 @@ steps do
     end
      console "@dogs = Dog.all.select{|d| d.age < 5 }"
     explanation do
-      message "The `select` method is also passed a *block* -- the `{|d| d.age < 5 }` part. This describes a function to use to select -- the whole thing will fill the `@dogs` variable with all of the dogs from `Dog.all` for which the block is true. In this case, the block compares the dog's age with the number 5; it is true if the dog is under 5 years old.
+      message "The `select` method is also passed a *block* -- the `{|d| d.age < 5 }` part. This describes a function to use to select -- the whole thing will fill the `@dogs` variable with all of the dogs from `Dog.all` for which the block returns true. In this case, the block compares the dog's age with the number 5; it is true if the dog is under 5 years old.
+
+The `|d|` sets the temporary variable used in the comparison. You could have said `{|pickle| pickle.age < 5}` instead with the same results, but using `d` for dog makes it a lot easier to follow and remember what the code does!
 "
     end
   end
@@ -66,7 +68,8 @@ if params[:sort_by]
 ```
 "
     explanation do
-      "`.send` takes a string and uses that as the method name -- so `d.send('name')` evaluates to `d.name`, and `d.send('age')` evaluates to `d.age`. So you can now sort your dogs by any of their attributes, by passing the name of that attribute as a parameter."
+      message "`.send` takes a string and uses that as the method name -- so `d.send('name')` evaluates to `d.name`, and `d.send('age')` evaluates to `d.age`. So you can now sort your dogs by any of their attributes, by passing the name of that attribute as a parameter."
+      tip "Although you're using new parameters here, you don't need to add them to `params(:permit)` as you did when adding fields to the dogs; this is because these new parameters are being used to affect the order the dogs are displayed in, but have *no effect* on the dogs stored in the database."
     end
   end
 
