@@ -77,10 +77,10 @@ message "  Now, we should be fully prepared to add ages to our dogs. Here's what
 * add a field in the index to display the age
 
 Go into your application and make sure you can add and view dogs' ages! (If you can't, review the above to see where you went wrong, and/or ask a TA.)
-Now is also a good time to <a href='/intro-to-rails/add_the_project_to_a_git_repo#step5'>commit your changes</a> and push to Heroku. 
+Now is also a good time to <a href='/intro-to-rails/add_the_project_to_a_git_repo#step5'>commit your changes</a> and <a href='/intro-to-rails/deploying_to_heroku#every-time'>push to Heroku</a>. 
 "
 message "
-Next: learn about some other datatypes! See the link above.
+Next: learn about some other datatypes! Use the [Rails documentation ](http://api.rubyonrails.org/classes/ActiveRecord/ConnectionAdapters/TableDefinition.html#method-i-column) to review your options.
 Try to choose the right datatypes for:
 
 * the date a dog arrived in the shelter
