@@ -24,7 +24,11 @@ By using `age:integer` when generating your migration, you added a field called 
   end
   step "Edit your controller to add `age` to the permitted parameters" do
     message "Open `/app/controllers/dogs_controller.rb`"
-    message "change params.require(:dog).permit(:name) to params.require(:dog).permit(:name, :age)"
+    message "change 
+```ruby
+params.require(:dog).permit(:name)
+``` to 
+```params.require(:dog).permit(:name, :age)```"
     explanation do
       message " This is telling our controller code what parameters to accept for the `dog` object.
 
@@ -33,6 +37,8 @@ This means that if we send part of the `DogsController` a request which asks to 
 Why is this important? Because it's easy for someone with bad intentions to send whatever parameters they want to our request. So we don't want to allow just arbitrary parameters to be set by request -- then malicious users could do things like send `is_admin=true` when updating their own account, and gain access to everything!
 
 [This page](http://api.rubyonrails.org/classes/ActionController/Parameters.html) discusses how the latest versions of Rails handle parameters -- the default behavior is the most secure, i.e. not accepting any parameters not explicitly allowed in the code. So each time we add a new field to our model, if we want the existing `edit`/`new`/`update` code to accept input for that field, we need to add it to the permitted parameters."
+
+tip "If you are using Rails 3.x, you can skip this step."
     end
   end
   step  "Edit `_form.html.erb` to add an input field for the dog's age" do
