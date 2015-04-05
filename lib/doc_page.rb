@@ -109,21 +109,27 @@ class DocPage < Html5Page
     }
 
     footer {
+#       p do
+# #        text "Going through this curriculum on your own? Get help at "
+# #        a "Code Newbie", href: "http://discourse.codenewbie.org/t/railsbridge-curriculum-questions/594/4"
+# #        text ", where RailsBridge volunteers can answer your questions."
+#       end
+#       p do
+#         text "If you have a suggestion for improving the docs, please make a "
+#         a "pull request ", href: "https://github.com/railsbridge/docs"
+#         text "or "
+#         a "drop us a note ", href: "https://github.com/railsbridge/docs/issues/new"
+#         text "via GitHub Issues (no technical knowledge required)."
+#       end
+      # p do
+      #   text "Source: "
+      #   url "https://github.com/railsbridge/docs"
+      # end
       p do
-        text "Going through this curriculum on your own? Get help at "
-        a "Code Newbie", href: "http://discourse.codenewbie.org/t/railsbridge-curriculum-questions/594/4"
-        text ", where RailsBridge volunteers can answer your questions."
-      end
-      p do
-        text "If you have a suggestion for improving the docs, please make a "
-        a "pull request ", href: "https://github.com/railsbridge/docs"
-        text "or "
-        a "drop us a note ", href: "https://github.com/railsbridge/docs/issues/new"
-        text "via GitHub Issues (no technical knowledge required)."
-      end
-      p do
-        text "Source: "
-        url "https://github.com/railsbridge/docs"
+        text "Based on the RailsBridge curriculum:"
+        url "http://curriculum.railsbridge.org"
+        text "Modified for"
+        a "RailsBridge Chicago", href: "http://railsbridgechi.com"
       end
     }
   end
