@@ -5,9 +5,8 @@ steps do
     console 'rails console'
     console 'Dog.all'
     console 'Dog.all.class'
-    message "If you are using Rails 4, this will be `ActiveRecord::Relation`. While this is not *exactly* like an array, it is able to do most of the things that an array can do. We can use it like an array in many ways. Like an array, it is a manipulable list -- you can sort it, filter it, reverse it, etc. If you have programmed before in another language, these methods may be familiar.
-
-    The `.all` method comes from ActiveRecord, which is a Rails-specific way of interacting with databases."
+    message "If you are using Rails 4, this will be `ActiveRecord::Relation`. While this is not *exactly* like an array, it is able to do most of the things that an array can do. We can use it like an array in many ways. Like an array, it is a manipulable list -- you can sort it, filter it, reverse it, etc. If you have programmed before in another language, these methods may be familiar."
+    message "The `.all` method comes from ActiveRecord, which is a Rails-specific way of interacting with databases."
     tip 'It may be helpful to check out the [official Ruby documentation on Array methods](http://ruby-doc.org/core-2.2.0/Array.html)'
     console  "@dogs = Dog.all.sort_by{|d| d.name }"
     explanation do
