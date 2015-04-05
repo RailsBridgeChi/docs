@@ -27,6 +27,29 @@ steps do
     message "Look at the loop in the view, and make sure you can visualize how the code executes once for each dog in `@dogs`."
   end
 
+  step do
+    message 'Open `app/views/dogs.html` and add links at the top to sort your dogs.'
+    message '
+```erb
+ <p>Sort:
+  <%= link_to "by name", dogs_path(sort_by: :name) %>
+  <%= link_to "by age", dogs_path(sort_by: :age) %>
+</p>
+<p>Filter:
+  <%= link_to "dogs under 5yo", dogs_path(babies: :true) %>
+  <%= link_to "dogs with pictures", dogs_path(pictures: :true) %>
+</p>
+```'
+    explanation do
+      message '`dogs_path` is Rails-ese for the URL of the dogs index page. You can pass arguments to this function, which are then used as parameters -- so `dogs_path(babies: :true)` will translate to `/dogs?babies=true`. Then, when the `dogs#index` action in the controller is run, `params[:babies]` will be true, so a filtered list will be displayed.
+
+Notice how you use `dogs_path` for all the sort/filter links, but pass different arguments each time -- and these arguments match the conditions you set up in your controller.
+'
+tip "These links won't do anything until you edit your controller in the next step."
+    end
+  end
+
+
   step "Sorting and selecting" do
     message "Open `/app/controllers/dogs_controller.rb`."
     explanation do
@@ -81,26 +104,6 @@ def index
 ````'
     explanation do
       message 'Putting this conditional code in your controller means that your users can pass parameters to your application to sort or filter your dogs -- the kind of sorting or filtering will be determined by the parameter.'
-    end
-  end
-  step do
-    message 'Open `app/views/dogs.html` and add links at the top to sort your dogs.'
-    message '
-```erb
- <p>Sort:
-  <%= link_to "by name", dogs_path(sort_by: :name) %>
-  <%= link_to "by age", dogs_path(sort_by: :age) %>
-</p>
-<p>Filter:
-  <%= link_to "dogs under 5yo", dogs_path(babies: :true) %>
-  <%= link_to "dogs with pictures", dogs_path(pictures: :true) %>
-</p>
-```'
-    explanation do
-      message '`dogs_path` is Rails-ese for the URL of the dogs index page. You can pass arguments to this function, which are then used as parameters -- so `dogs_path(babies: :true)` will translate to `/dogs?babies=true`. Then, when the `dogs#index` action in the controller is run, `params[:babies]` will be true, so a filtered list will be displayed.
-
-Notice how you use `dogs_path` for all the sort/filter links, but pass different arguments each time -- and these arguments match the conditions you set up in your controller.
-'
     end
   end
 end
