@@ -19,6 +19,9 @@ steps do
   end
   step do
     console 'bundle install'
+explanation do
+message "This step installs the `carrierwave` and `cloudinary` gems to your application."
+end
     console 'rails g uploader picture'
     explanation do
     message "`rails g` is short for `rails generate` (you can type either; they do the same thing). You may remember this from `rails g migration` or `rails g scaffold` -- a generator creates code files for you with some things pre-filled in."
@@ -102,7 +105,9 @@ step do
         </td>
 ```'
   explanation do
-    message "This line adds an image tag to your HTML, which looks for the URL to the thumbnail picture of your dog and uses that as the image source. Adding `unless dog.picture_url(:thumb).blank?` will keep you from having broken images for any dogs that haven't had pictures uploaded for them."
+    message "This line adds an image tag to your HTML, which looks for the URL to the thumbnail picture of your dog and uses that as the image source. 
+
+Adding `unless dog.picture_url(:thumb).blank?` will keep your app from trying to display broken images for any dogs that haven't had pictures uploaded for them."
   end
 end
 step do
@@ -110,7 +115,10 @@ step do
   console 'git commit -a -m "added pictures to dogs"'
   console 'git push heroku master'
   console 'heroku run rake db:migrate'
-  message "And now, you should be able to open your Heroku application, upload a picture to your dogs, and see that picture displayed in your list of dogs!"
+  message "And now, you should be able to open your Heroku application, upload a picture to your dogs, and see that picture displayed in your list of dogs!
+
+Try exchanging Heroku URLs with other students in your group and uploading dog pictures to each others' apps.
+"
 end
 end 
 next_step 'sorting'
