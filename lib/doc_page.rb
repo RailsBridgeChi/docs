@@ -127,8 +127,11 @@ class DocPage < Html5Page
       # end
       p do
         text "Based on the RailsBridge curriculum:"
+      end
+      p do
         url "http://curriculum.railsbridge.org"
-        text "Modified for"
+      end
+        text "Modified for "
         a "RailsBridge Chicago", href: "http://railsbridgechi.com"
       end
     }
