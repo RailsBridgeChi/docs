@@ -10,11 +10,11 @@ steps do
     end
   end
   step do
-    console 'addons:add cloudinary'
+    console 'heroku addons:add cloudinary'
     message "add `gem 'cloudinary'` to the `Gemfile`"
     explanation do
       message "Since Heroku doesn't let us store images on our filesystem, we will need to use cloud storage. Cloudinary will give us a place to store our images where they'll be accessible via Heroku."
-      message "`addons:add cloudinary` activates Cloudinary via your Heroku account."
+      message "`heroku addons:add cloudinary` activates Cloudinary via your Heroku account."
     end
   end
   step do
