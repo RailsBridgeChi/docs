@@ -1,3 +1,5 @@
+message "<a href='http://www.slideshare.net/ameedahc/rbc-mod-2?related=1'> Datatypes: Visual Guide</a>"
+
 goals do
   goal "Add more information to our dogs table"
   message "Now that we have a table full of dogs with names, we'd like to add some more information! Just having a list of names isn't that interesting. But we know lots of things about our dogs -- age, color, date they entered the shelter, whether or not they're fixed -- that we'd like to have available for our potential adopters.

@@ -10,6 +10,36 @@ site_desc 'intro-to-rails', <<-MARKDOWN
  Takes you step-by-step through making a Rails app, one command at a time, using helpers like `rails generate scaffold`, and deploying that app to the Internet.
 MARKDOWN
 
+h1 'View Slides!'
+
+ul do
+li do a 'Intro to Ruby (by Clara)', href:
+ 'https://arcane-mountain-3734.herokuapp.com/'  
+end
+li do a 'Intro to Web Development (by Lauren)', href: 'https://www.haikudeck.com/intro-to-web-development--railsbridge-chicago-uncategorized-presentation-djPNowfbaG'
+end
+li do a 'CSS/Javascript (by Adriana)', href:
+'http://prezi.com/7pjpd9mkvqhj/?utm_campaign=share&utm_medium=copy'
+end
+li do a 'Databases', href:
+'http://slideviewer.herokuapp.com/github/catherinev/teaching_materials/blob/master/IntroDatabases.ipynb?create=1#/1'
+end
+li do a 'Git & Github (by Cathy)', href:
+'http://slides.com/cathydeng/deck'
+end
+li do a 'MVC (Model View Controller) (by Megan)', href:
+'https://www.haikudeck.com/mvc-uncategorized-presentation-IhbIJ0oPFf'
+end
+li do a 'Rails Routing (by Joe)', href:
+'https://docs.google.com/presentation/d/1-rrfl9Fn5KOAQJAQ004Qwy7BhQx30Tk3CWD7v2BdTwc/edit?usp=sharing'
+end
+li do a 'Getting Started (curriculum accompaniment by Ameeda)', href: 'http://www.slideshare.net/ameedahc/rbc-module1-47128870'
+end
+li do a 'Datatypes (curriculum accompaniment by Ameeda)', href: 
+'http://www.slideshare.net/ameedahc/rbc-mod-2?related=1'
+end
+end
+
 h1 'Credits'
 
 message "This is [Railsbridge Chicago](http://railsbridgechi.com)'s customization of the <a href='http://curriculum.railsbridge.org'>volunteer-created Railsbridge curriculum</a>."
