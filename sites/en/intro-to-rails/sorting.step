@@ -23,14 +23,14 @@ The `|d|` sets the temporary variable used in the comparison. You could have sai
   end
   
   step do
-    message 'Open app/views/dogs/index.html, and look at where the `@dogs.each` code is used.'
+    message 'Open app/views/dogs/index.html.erb, and look at where the `@dogs.each` code is used.'
     message "`@dogs` is `Dog.all` (set in `dogs_controller`), so it's an `ActiveRecord::Relation` -- again, this works basically like an array for your purposes."
     message "`.each` is an array method that we can also use on `ActiveRecord::Relation` -- it executes the code within the block (either `do..end` or `{..}`) after `.each` once using each item from the list of `@dogs`. "
     message "Look at the loop in the view, and make sure you can visualize how the code executes once for each dog in `@dogs`."
   end
 
   step do
-    message 'Open `app/views/dogs.html` and add links at the top to sort your dogs.'
+    message 'Open `app/views/dogs/index.html.erb` and add links at the top to sort your dogs.'
     message '
 ```erb
  <p>Sort:
