@@ -81,4 +81,30 @@ step do
     message "This should remind you of the process of adding fields like `age` to your `dogs`! That process also involved adding a field to the form, adding a new permitted parameter in the controller, and adding a field to the display. Once you've completed this step, you should be able to edit your `dogs` to add breeds, and then see those breeds displayed in the main list. "
   end
 end
+step do
+  message  "Now we can let the shelter visitors browse dogs by the breed they would like."
+  message "Open `/app/views/dogs/index.html`" 
+  message "```erb
+ <% Breed.all.each do |b| %>
+  <%= link_to b.name, dogs_path(breed_id: b.id) %>
+  <% end %>
+```"
+  message "Edit the `index` method in `/app/controllers/dogs_controller.rb`:"
+  message "```ruby
+  def index
+    if params[:sort_by]
+      @dogs = Dog.all.sort_by(&params[:sort_by].to_sym)
+    elsif params[:babies]
+      @dogs = Dog.all.select{|d| d.age < 5 }
+    elsif params[:pictures]
+      @dogs = Dog.all.select{|d| !(d.picture_url.blank?) }
+    elsif params[:breed_id]
+      @dogs = Breed.find(params[:breed_id]).dogs
+    else
+      @dogs = Dog.all
+    end
+  end
+```"
+  tip "Bonus challenge! Can you figure out how to display the breed's description when dogs are filtered by breed?"
+end
 end
