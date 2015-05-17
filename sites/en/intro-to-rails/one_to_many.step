@@ -1,0 +1,84 @@
+goals do
+goal "You would like to be able to sort dogs by breed -- but you don't want to just add a `breed` field as a string. You want `breeds` to be first-class repsources in your app -- you want to be able to store information about the breed in a `breeds` table, just like you stored information about dogs in your `dogs` table."
+goal "For this, you will learn how to add a second table, and how to create an *association* between two tables."
+end
+
+steps do
+step do
+  message "Let's add a new table to our application! So far you have just one table, _dogs_."
+  console "rails g scaffold breeds name:string description:text"
+  explanation do
+    message "Just like when you created the `dogs` table at the beginning of this project -- the scaffold generation here created views, models, and controllers for you. 
+
+It also generated a migration that will add this table to the database for you with the fields you specified."
+  end
+end
+step do
+message  "we do the migration..."
+console "bundle exec rake db:migrate"
+tip "Remember to start your rails server if it's not already running."
+message "Now you should be able to visit `localhost:3000/breeds` and add some breeds and their descriptions. Clicking 'Show' next to a breed on the `/breeds` page should take you to the breed's *view*, where you can see its name and description."
+explanation do
+  message "This process should be familiar and you should remember all the steps from earlier -- so far, setting up breeds has worked exactly the same as setting up dogs."
+end
+end
+step do
+  message "So now you have breeds set up, but you don't have a connection between breeds and dogs. The next step is to *associate* the breeds and dogs tables."
+  message "For now, you will use a *one-to-many* relation."
+  message "Enter the `/app/models/dog.rb` file and, under the line `class Dog < ActiveRecord::Base`, add: "
+message "```ruby
+belongs_to :breed
+```
+"
+message "Next, edit the `/app/models/breed.rb` file, and, under the line `class Breed < ActiveRecord::Base`, add: "
+message "```ruby
+has_many :dogs
+```"
+explanation do
+  message "Adding these lines to `breed.rb` and `dog.rb` tells your application about the relationship between these two things. Now the application knows that each dog can be associated with one breed, and each breed can have many dogs associated with it."
+end
+end
+step do
+  message "You will need to add a place for your database to store this information."
+  console "rails g migration AddBreedIdToDogs breed_id:integer"
+  console "rake db:migrate"
+  explanation do
+    message "The `breed_id` here is called a *foreign key*. For a one-to-many relationship, you only need to put the foreign key in one of your tables. Put the key in the table that `belongs_to` the other association. Each `breed` `has_many` `dogs`, and each `dog` has one unique `breed_id`, so you add `breed_id` to the `dogs` table for this relationship."
+  end
+end
+step do
+  message "Open `/app/views/dogs/_form.html.erb` and add:"
+  message "```erb
+  <div class='field'>
+    <%= f.collection_select(:breed_id, Breed.all, :id, :name) %>
+  </div>
+```"
+  message "Open `/app/controllers/dogs_controller.rb` and change your `dog_params` method to include `:breed`:"
+  message  "```ruby
+    def dog_params
+      params.require(:dog).permit(:name, :age, :picture, :breed_id)
+    end
+```"
+  tip "Don't forget to keep any fields you added earlier in `dog_params`, if your `dogs` have other attributes like `description` or `birthdate`."
+  message "Open `/app/views/dogs/index.html.erb` and add:"
+  message "```html
+<th>Breed</th>
+```"
+  message "after"
+  message "```html
+<th>Age</th>
+```"
+  message "and"
+  message "```erb
+ <td><%= dog.breed.try(:name) %></td>
+```"
+  message "after"
+  message "```erb
+ <td><%= dog.age %></td>
+```"
+  tip "Adding `.try` means that you won't get an error if any of your dogs' `breed` is nil -- which it will be for all of them, at first."
+  explanation do
+    message "This should remind you of the process of adding fields like `age` to your `dogs`! That process also involved adding a field to the form, adding a new permitted parameter in the controller, and adding a field to the display. Once you've completed this step, you should be able to edit your `dogs` to add breeds, and then see those breeds displayed in the main list. "
+  end
+end
+end
