@@ -1,5 +1,5 @@
 goals do
-goal "You would like to be able to sort dogs by breed -- but you don't want to just add a `breed` field as a string. You want `breeds` to be first-class repsources in your app -- you want to be able to store information about the breed in a `breeds` table, just like you stored information about dogs in your `dogs` table."
+goal "You would like to be able to sort dogs by breed &mdash; but you don't want to just add a `breed` field as a string. You want `breeds` to be first-class resources in your app &mdash; you want to be able to store information about the breed in a `breeds` table, just like you stored information about dogs in your `dogs` table."
 goal "For this, you will learn how to add a second table, and how to create an *association* between two tables."
 end
 
@@ -14,12 +14,12 @@ It also generated a migration that will add this table to the database for you w
   end
 end
 step do
-message  "we do the migration..."
+message  "Run the migration."
 console "bundle exec rake db:migrate"
 tip "Remember to start your rails server if it's not already running."
 message "Now you should be able to visit `localhost:3000/breeds` and add some breeds and their descriptions. Clicking 'Show' next to a breed on the `/breeds` page should take you to the breed's *view*, where you can see its name and description."
 explanation do
-  message "This process should be familiar and you should remember all the steps from earlier -- so far, setting up breeds has worked exactly the same as setting up dogs."
+  message "This process should be familiar and you should remember all the steps from earlier -- so far, setting up breeds via scaffolding has worked exactly the same as setting up dogs via scaffolding."
 end
 end
 step do
@@ -43,7 +43,9 @@ step do
   console "rails g migration AddBreedIdToDogs breed_id:integer"
   console "rake db:migrate"
   explanation do
-    message "The `breed_id` here is called a *foreign key*. For a one-to-many relationship, you only need to put the foreign key in one of your tables. Put the key in the table that `belongs_to` the other association. Each `breed` `has_many` `dogs`, and each `dog` has one unique `breed_id`, so you add `breed_id` to the `dogs` table for this relationship."
+    message "The `breed_id` here is called a *foreign key*. For a one-to-many relationship, you only need to put the foreign key in one of your tables. Put the key in the table that `belongs_to` the other association. Each `breed` `has_many` `dogs`, and each `dog` has one unique `breed_id`, so you need to add `breed_id` to the `dogs` table in order to store this relationship.
+    Now, each `dog` can find its breed via the `breed_id` stored in its table &mdash; and each `breed` can find the `dogs` associated with it by looking for their matching `breed_id`.
+"
   end
 end
 step do
@@ -82,7 +84,11 @@ step do
   end
 end
 step do
-  message  "Now we can let the shelter visitors browse dogs by the breed they would like."
+  message  "Next, you want to let the shelter visitors browse dogs by the breed they would like. 
+
+There are many possible ways of doing this; outlined here are the steps for using a list of links on the index page, which is similar to what you did in the 'Sorting' lesson.
+
+If you're feeling up for more challenge, see if you can use a different approach to allow people to view all the dogs in a breed &mdash; maybe by showing all the dogs in a breed on the breed's `show` page, or maybe by grouping the dogs on the `index` page by breed, or "
   message "Open `/app/views/dogs/index.html`" 
   message "```erb
  <% Breed.all.each do |b| %>
@@ -90,6 +96,7 @@ step do
   <% end %>
 ```"
   message "Edit the `index` method in `/app/controllers/dogs_controller.rb`:"
+  tip "Your method may look slightly different if you skipped the 'Sorting' lesson or took a different approach there. The main change you want to make now is adding a check for the `breed_id` parameter and defining `@dogs` based on this."
   message "```ruby
   def index
     if params[:sort_by]
