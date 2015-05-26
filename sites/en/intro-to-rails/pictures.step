@@ -32,7 +32,7 @@ end
     message 'Open `app/uploaders/picture_uploader.rb:`'
     message 'Add the code'
     message '```ruby
-    include Cloudinary::CarrierWave   ```'
+    include Cloudinary::CarrierWave'
     message 'under the line `class PictureUploader < CarrierWave::Uploader::Base`'
 explanation do
 message "This line tells the uploader to include some code from the `cloudinary` gem which enables CarrierWave to use Cloudinary as a storage system."
