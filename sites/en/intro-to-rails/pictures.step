@@ -110,6 +110,34 @@ step do
 Adding `unless dog.picture_url(:thumb).blank?` will keep your app from trying to display broken images for any dogs that haven't had pictures uploaded for them."
   end
 end
+
+step do
+message 'Add `cloudinary.yml` to your `config` folder.'
+message "If you are logged in to Heroku in your browser, you should be able to download it from `http://cloudinary.com/console/cloudinary.yml`.'
+message "It should look something like this:"
+message "```ruby
+---
+development:
+  cloud_name: [something]
+  api_key: [something]
+  api_secret: [something]
+  enhance_image_tag: true
+  static_image_support: false
+production:
+  cloud_name: [something]
+  api_key: [something]
+  api_secret: [something]
+  enhance_image_tag: true
+  static_image_support: true
+test:
+  cloud_name: [something]
+  api_key: [something]
+  api_secret: [something]
+  enhance_image_tag: true
+  static_image_support: false
+```'
+end
+
 step do
   message 'Commit your changes and push to heroku:'
   console 'git commit -a -m "added pictures to dogs"'
