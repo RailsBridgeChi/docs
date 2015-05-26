@@ -14,8 +14,8 @@ steps do
     tip do
       message "Heroku might ask you to enter a credit card at this step; Cloudinary's starter plan is free and you _will not_ be charged."
     end
-  end
-  step do
+
+
     message "add `gem 'cloudinary'` to the `Gemfile`"
     explanation do
       message "Since Heroku doesn't let us store images on our filesystem, we will need to use cloud storage. Cloudinary will give us a place to store our images where they'll be accessible via Heroku."
