@@ -76,6 +76,10 @@ gem 'cloudinary'"
     message '```ruby
 mount_uploader :picture, PictureUploader
 ```'
+message "under the line"
+'```ruby
+class Dog < ActiveRecord::Base
+```'
   console 'rails g migration add_picture_to_dogs picture:string'
   console 'bundle exec rake db:migrate'
   end
@@ -93,7 +97,7 @@ require(:dog).permit(:name, :age, :picture)
     end
   end
   step do
-    message 'open `app/views/dogs/_form.html.erb` and add:'
+    message 'open `app/views/dogs/_form.html.erb` and, above one of the other lines saying `<div class="field">`, add:'
     message '```ruby
    <div class="field">
     <%= f.label :picture %>
@@ -120,8 +124,9 @@ Adding `unless dog.picture_url(:thumb).blank?` will keep your app from trying to
   end
 
   step do
-    message 'Add `cloudinary.yml` to your `config` folder.'
+    message 'Add `cloudinary.yml` to your `/config` folder.'
     message "If you are logged in to Heroku in your browser, you should be able to download it from `http://cloudinary.com/console/cloudinary.yml`."
+message "Save this file to the `/config` folder under your app's main folder."
 message "The contents of `cloudinary.yml` should look something like this:"
 message "```ruby
 ---
