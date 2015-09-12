@@ -6,7 +6,7 @@ end
 steps do
 step do
   message "Let's add a new table to our application! So far you have just one table, _dogs_."
-  console "rails g scaffold breeds name:string description:text"
+  console "rails g scaffold breed name:string description:text"
   explanation do
     message "Just like when you created the `dogs` table at the beginning of this project -- the scaffold generation here created views, models, and controllers for you. 
 
