@@ -22,6 +22,7 @@ steps do
   end
   step "Use scaffolding to create the basic files needed to create, read, update, and delete `dog` resources" do
     console "rails g scaffold dogs name:string"
+    tip "`rails g` is short for `rails generate`; whenever you see `rails g` or `rails generate`, you're seeing a command that is going to create some files."
     explanation do
       message "The Rails framework includes code to create *scaffolding*: scaffolds are files with the basic code needed to create, edit, and delete resources."
       message "Usually, you will edit your scaffolds significantly to create your final product."
