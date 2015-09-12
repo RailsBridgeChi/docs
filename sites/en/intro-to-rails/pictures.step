@@ -77,7 +77,7 @@ gem 'cloudinary'"
 mount_uploader :picture, PictureUploader
 ```'
 message "under the line"
-'```ruby
+message '```ruby
 class Dog < ActiveRecord::Base
 ```'
   console 'rails g migration add_picture_to_dogs picture:string'
