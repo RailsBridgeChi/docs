@@ -106,7 +106,7 @@ tip "If you killed the server with `Control-c` in the last step, you may need to
     end
 
   step "Edit the view that displays your `dog` list" do
-    message "Edit the file `app/views/dogs/index.html.erb`; add some text, such as "This dog's name is", before the code `<%= dog.name %>` (but after the `<td>` HTML tag).
+    message "Edit the file `app/views/dogs/index.html.erb`; add some text, such as \"This dog's name is\", before the code `<%= dog.name %>` (but after the `<td>` HTML tag).
 "
     explanation do
       message "Rails views use a combination of HTML and ERB (which is a kind of Ruby code)."
