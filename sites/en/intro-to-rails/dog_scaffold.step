@@ -106,7 +106,7 @@ tip "If you killed the server with `Control-c` in the last step, you may need to
     end
 
   step "Edit the view that displays your `dog` list" do
-    message "Edit the file `app/views/dogs/index.html.erb`; put `<b></b>` tags on either side of the code `<%= dog.name %>`.
+    message "Edit the file `app/views/dogs/index.html.erb`; add some text, such as "This dog's name is", before the code `<%= dog.name %>` (but after the `<td>` HTML tag).
 "
     explanation do
       message "Rails views use a combination of HTML and ERB (which is a kind of Ruby code)."
@@ -114,7 +114,7 @@ tip "If you killed the server with `Control-c` in the last step, you may need to
 
 Anything within a `<% %>` is interpreted as Ruby code, but not printed out. For example, this page uses a *loop* to print out the same information for each `dog` record: the loop begins with `<% for @dogs.each %>` and ends with `<% end %>`.
 
-All of the code within the loop gets executed once for each record stored in the `@dogs` array variable. Since you added the `<b></b>` tags within the loop, the boldness is applied to all the dogs in your database. (Add some more dogs to your database if you have less than two dogs right now, so you can see the loop in action.)
+All of the code within the loop gets executed once for each record stored in the `@dogs` array variable. Since you added the extra text within the loop, it will show up as many times as you have dogs in your database. (Add some more dogs to your database if you have less than two dogs right now, so you can see the loop in action.)
 "
     end
   end
