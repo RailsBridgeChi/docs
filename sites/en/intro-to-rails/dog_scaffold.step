@@ -34,7 +34,7 @@ Some important ones include:
 `dogs name:string` means our table is called `dogs` and has a value called `name` for each row
 
 * models: `app/models/dog.rb`
-* views: `app/models/views/dogs`
+* views: `app/views/dogs`
 * controllers: `app/controllers/dogs_controller.rb`
 
 The basic CRUD features for `dogs` are already in the model, view, and controller files.
