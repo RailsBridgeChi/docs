@@ -49,7 +49,7 @@ tip "If you are using Rails 3.x, you can skip this step."
   step  "Edit `_form.html.erb` to add an input field for the dog's age" do
     message "add to `/app/views/dogs/_form.html.erb`:"
     message "```erb
- <div class='field'>
+ <div class="field">
     <%= f.label :age %><br>
     <%= f.number_field :age %>
   </div>
