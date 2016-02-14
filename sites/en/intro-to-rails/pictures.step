@@ -22,7 +22,7 @@ gem 'carrierwave'"
 gem 'cloudinary'"
     explanation do
       message "Since Heroku doesn't let us store images on our filesystem, we will need to use cloud storage. Cloudinary will give us a place to store our images where they'll be accessible via Heroku."
-      message "`heroku addons:add cloudinary` activates Cloudinary via your Heroku account."
+      message "`heroku addons:create cloudinary` activates Cloudinary via your Heroku account."
     end
   end
   step do
@@ -63,7 +63,9 @@ gem 'cloudinary'"
     
     message 'uncomment the line'
     message "```ruby
- version :thumb
+ version :thumb do
+    process :resize_to_fit => [50, 50]
+ end
 ``` "
     explanation do
       message "This line means the uploader will automatically create resized thumbnail versions of your pictures -- so that your users won't have to worry about what size their pictures are when they upload them."
