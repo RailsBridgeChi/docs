@@ -14,7 +14,7 @@ gem 'carrierwave'"
   step do
     console 'heroku addons:create cloudinary'
     tip do
-      message "Heroku might ask you to enter a credit card at this step; Cloudinary's starter plan is free and you _will not_ be charged."
+      message "Heroku might ask you to enter a credit card at this step; Cloudinary's starter plan is free and you _will not_ be charged. However, if you'd like to skip this step, please feel free to do so."
     end
 
     message "Edit your `Gemfile` and add the line:"
@@ -58,9 +58,9 @@ gem 'cloudinary'"
 #  end
 ```'
     explanation do
-      message "If we were storing the pictures on our own filesystem, rather than in the cloud, we would want to keep these lines, and our pictures would be stored in the `uploads/` directory; however, since we're going to use Cloudinary instead, we'll need to comment out the lines about filesystem storage." 
+      message "If we were storing the pictures on our own filesystem, rather than in the cloud, we would want to keep these lines, and our pictures would be stored in the `uploads/` directory; however, since we're going to use Cloudinary instead, we'll need to comment out the lines about filesystem storage."
     end
-    
+
     message 'uncomment the line'
     message "```ruby
  version :thumb do
@@ -71,7 +71,7 @@ gem 'cloudinary'"
       message "This line means the uploader will automatically create resized thumbnail versions of your pictures -- so that your users won't have to worry about what size their pictures are when they upload them."
     end
   end
-  
+
   step do
     message 'open `app/models/dog.rb`'
     message 'add the code:'
@@ -119,7 +119,7 @@ require(:dog).permit(:name, :age, :picture)
         </td>
 ```'
     explanation do
-      message "This line adds an image tag to your HTML, which looks for the URL to the thumbnail picture of your dog and uses that as the image source. 
+      message "This line adds an image tag to your HTML, which looks for the URL to the thumbnail picture of your dog and uses that as the image source.
 
 Adding `unless dog.picture_url(:thumb).blank?` will keep your app from trying to display broken images for any dogs that haven't had pictures uploaded for them."
     end
@@ -163,5 +163,5 @@ step do
 Try exchanging Heroku URLs with other students in your group and uploading dog pictures to each others' apps.
 "
 end
-end 
+end
 next_step 'sorting'
